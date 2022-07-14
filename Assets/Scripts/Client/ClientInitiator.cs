@@ -33,7 +33,7 @@ namespace Client
         [ContextMenu("Save")]
         public void Save()
         {
-            global::Client.Client.Instance.GameSaverManager.SaveGameData();
+            global::Client.Client.Instance.GameSaver.SaveGameData();
         }
 
         #endregion

@@ -3,11 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(ScrollRect))]
-public class FeedController : MonoBehaviour
+public class FeedView : MonoBehaviour
 {
-    private const string BAD = "Bad";
-    private const string GOOD = "Good";
-    private const string LEVEL_ONE = "Level1";
     private const string FEED_ITEM = "FeedItem";
     private const string PREFABS_FOLDER = "Prefabs";
     
@@ -19,9 +16,9 @@ public class FeedController : MonoBehaviour
     private Sprite[] _badSprites;
     private Sprite[] _goodSprites;
     private ScrollRect _scrollRect;
-    private GameObject _feedItemPrefab;
+    private GameObject _feedItemPrefab = Resources.Load<GameObject>(PREFABS_FOLDER + Path.DirectorySeparatorChar + FEED_ITEM);
 
-    [SerializeField] private Transform _contentTransform;
+    [SerializeField] private ConvexHullParent _contentParent;
 
     public bool EnableAutoScrolling { get; set; }
 
@@ -41,16 +38,18 @@ public class FeedController : MonoBehaviour
         CreateItems(feedSo.Shuffled, startVectorOffset, addedOffset);
     }
 
-    private void CreateItems(FeedItem[] feedItemsData, Vector3 accumulatedOffset, Vector3 addedOffset)
+    private void CreateItems(FeedItemSO[] feedItemsData, Vector3 accumulatedOffset, Vector3 addedOffset)
     {
         if (feedItemsData == null) return;
         
         foreach (var feedItemData in feedItemsData)
         {
-            var item = Instantiate(_feedItemPrefab, _contentTransform).GetComponent<FeedItemController>();
+            var item = Instantiate(_feedItemPrefab, _contentParent.transform).GetComponent<FeedItemView>();
             item.Setup(feedItemData, accumulatedOffset);
             accumulatedOffset += addedOffset;
         }
+        
+        _contentParent.Resize();
     }
 
     void Update()

@@ -2,18 +2,15 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager 
 {
-    private GameObject _feedPrefab;
-    private FeedController _currentLevel;
+    private GameObject _feed;
+    private FeedView _currentLevel;
 
-    private void Awake()
+    public LevelManager()
     {
-        _feedPrefab = Resources.Load<GameObject>("Prefabs" + Path.DirectorySeparatorChar + "Feed");
-    }
-
-    private void Start()
-    {
+        _feed = GameObject.Instantiate(
+            Resources.Load<GameObject>("Prefabs" + Path.DirectorySeparatorChar + "FeedCanvas"));
         LoadLevel(1);
     }
 
@@ -25,13 +22,13 @@ public class LevelManager : MonoBehaviour
 
     private void Load(int levelNumber)
     {
-        if (transform.childCount > 0)
+        if (_currentLevel != null)
         {
-            Destroy(_currentLevel.gameObject);
+            GameObject.Destroy(_currentLevel.gameObject);
         }
         
-        _currentLevel = Instantiate(_feedPrefab, transform).GetComponent<FeedController>();
-        var data = Resources.Load<FeedSO>("Feeds" + Path.DirectorySeparatorChar + "Feed" + levelNumber);
+        _currentLevel = _feed.GetComponentInChildren<FeedView>();
+        var data = Resources.Load<FeedSO>("Configuration" + Path.DirectorySeparatorChar + "Feeds" + Path.DirectorySeparatorChar + "Feed" + levelNumber);
         _currentLevel.Setup(data);
     }
 

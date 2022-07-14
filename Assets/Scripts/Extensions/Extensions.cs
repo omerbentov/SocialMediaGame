@@ -45,13 +45,13 @@ namespace Extensions
         }
         
         
-        public static FeedItem[] Shuffle(this FeedItem[] goodItems, FeedItem[] badItems)
+        public static FeedItemSO[] Shuffle(this FeedItemSO[] goodItems, FeedItemSO[] badItems)
         {
             var goodPassedCount = 0;
             var badPassedCount = 0;
             var totalItems = goodItems.Length + badItems.Length;
 
-            var feedItemsData = new FeedItem[totalItems];
+            var feedItemsData = new FeedItemSO[totalItems];
 
             for (var i = 0; i < totalItems; i++)
             {

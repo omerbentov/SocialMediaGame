@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2a0a57b1068b44409cb99eb4967bf98, type: 3}
-  m_Name: ItemBad 1
+  m_Script: {fileID: 11500000, guid: 7c14a8989715e481795899a0f99eae7d, type: 3}
+  m_Name: Main
   m_EditorClassIdentifier: 
-  Likes: 5
-  Title: Bad
-  Sprite: {fileID: 21300000, guid: e7cdcdd51d2294b738abe52ee25f131a, type: 3}
-  IsGood: 0
+  UserInterfaceSo: {fileID: 11400000, guid: d06ab694ae8824a85ab80608fc90d982, type: 2}
+  Feeds:
+  - {fileID: 11400000, guid: c47274eb5c7884fa49bb33765c0ad3e6, type: 2}

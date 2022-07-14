@@ -4,10 +4,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Feed", menuName = "SO/Feed")]
 public class FeedSO : ScriptableObject
 {
-    public FeedItem[] GoodItems;
-    public FeedItem[] Badtems;
+    public FeedItemSO[] GoodItems;
+    public FeedItemSO[] Badtems;
 
-    public FeedItem[] Shuffled
+    public FeedItemSO[] Shuffled
     {
         get
         {

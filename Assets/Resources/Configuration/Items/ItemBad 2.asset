@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Likes: 5
   Title: Bad
-  Sprite: {fileID: 21300000, guid: e7cdcdd51d2294b738abe52ee25f131a, type: 3}
+  Sprite: {fileID: 21300000, guid: d19781b6df71941a2829aa92b00ba8c4, type: 3}
   IsGood: 0

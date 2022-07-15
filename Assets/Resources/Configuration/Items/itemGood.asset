@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Likes: 5
   Title: Good
-  Sprite: {fileID: 21300000, guid: 0d30025b6a39b4188accfb3bb1f2ef79, type: 3}
+  Sprite: {fileID: 21300000, guid: d19781b6df71941a2829aa92b00ba8c4, type: 3}
   IsGood: 1

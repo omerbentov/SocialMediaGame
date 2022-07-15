@@ -14,4 +14,9 @@ public class FeedSO : ScriptableObject
             return GoodItems.Shuffle(Badtems);
         }
     }
+
+    public int ItemCount
+    {
+        get { return GoodItems.Length + Badtems.Length; }
+    }      
 }

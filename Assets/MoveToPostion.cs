@@ -9,8 +9,6 @@ public class MoveToPostion : MonoBehaviour
     private Vector3 _basePosition;
     private float _timeSinceEnabled;
     private Action _onArrival;
-    private Vector3 _direction;
-    private float _distance;
     private Vector3 _medianWithNoise;
     private float _halfMovementTime;
 
@@ -47,12 +45,14 @@ public class MoveToPostion : MonoBehaviour
         _basePosition = startPosition;
         transform.position = _basePosition;
         _onArrival = onArrival;
-        _direction = (startPosition - _goToPosition).normalized;
-        _distance = Vector3.Distance(startPosition, _goToPosition);
-
-        var medianOnLine = startPosition + ((_distance / 4) * _direction);
-        var tangent = Vector3.Cross(_direction, Vector3.forward);
-        if(tangent == Vector3.zero)  Vector3.Cross(_direction, Vector3.up);
-        _medianWithNoise = medianOnLine + tangent.normalized *  Random.Range(-1 * _distance / 10, _distance / 10);
+        
+        var directionNormalized = (startPosition - _goToPosition).normalized;
+        var distance = Vector3.Distance(startPosition, _goToPosition);
+        var medianOnLine = startPosition + ((distance / 3f) * directionNormalized);
+        var tangentNormalized = Vector3.Cross(directionNormalized, Vector3.forward).normalized;
+        if(tangentNormalized == Vector3.zero)  tangentNormalized = Vector3.Cross(directionNormalized, Vector3.up).normalized;
+        var random = Random.Range(-1 * distance / 10, distance / 10);
+        
+        _medianWithNoise = medianOnLine + (tangentNormalized * random);
     }
 }

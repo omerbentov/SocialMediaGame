@@ -31,7 +31,16 @@ public class FeedView : MonoBehaviour
         var addedOffset = new Vector3(0,  - BETWEEN_ITEMS - itemLength, 0);
         var startVectorOffset = new Vector3(0, START_Y_OFFSET, 0);
 
+        SetupContentSize(feedSo);
         CreateItems(feedSo.Shuffled, startVectorOffset, addedOffset);
+    }
+
+    private void SetupContentSize(FeedSO feedSo)
+    {
+        _contentParent.GetComponent<RectTransform>().sizeDelta =
+            new Vector2(
+                0,
+                _feedItemPrefab.GetComponent<RectTransform>().rect.height * feedSo.ItemCount + (feedSo.ItemCount - 1) * BETWEEN_ITEMS);
     }
 
     private void CreateItems(FeedItemSO[] feedItemsData, Vector3 accumulatedOffset, Vector3 addedOffset)

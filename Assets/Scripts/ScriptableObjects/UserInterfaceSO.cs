@@ -9,4 +9,6 @@ public class UserInterfaceSO : ScriptableObject
     public bool CollectiblesEnabled;
     public Sprite CollectibleSprite;
     public GameObject CollectiblePrefab;
+    public GameObject CollectibleWidgetPrefab;
+    public float CollectibleTimerToMove;
 }

@@ -21,12 +21,17 @@ public class FeedItemView : MonoBehaviour
 
     public void OnClick()
     {
-        Client.Client.Instance.Broadcaster.Broadcast(new ItemClickedEvent(){ IsGood = _isGood, Transform = transform});
+        Client.Client.Instance.Broadcaster.Broadcast(
+            new ItemClickedEvent()
+            {
+                IsGood = _isGood,
+                Position = transform.position
+            });
     }
 }
 
 public class ItemClickedEvent
 {
     public bool IsGood { get; set; }
-    public Transform Transform { get; set; }
+    public Vector3 Position { get; set; }
 }

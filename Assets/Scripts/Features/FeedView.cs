@@ -16,19 +16,15 @@ public class FeedView : MonoBehaviour
     private Sprite[] _badSprites;
     private Sprite[] _goodSprites;
     private ScrollRect _scrollRect;
-    private GameObject _feedItemPrefab = Resources.Load<GameObject>(PREFABS_FOLDER + Path.DirectorySeparatorChar + FEED_ITEM);
+    private GameObject _feedItemPrefab;
 
     [SerializeField] private ConvexHullParent _contentParent;
 
     public bool EnableAutoScrolling { get; set; }
 
-    private void Awake()
-    {
-        _feedItemPrefab = Resources.Load<GameObject>(PREFABS_FOLDER + Path.DirectorySeparatorChar + FEED_ITEM);
-    }
-
     public void Setup(FeedSO feedSo)
     {
+        _feedItemPrefab = Resources.Load<GameObject>(PREFABS_FOLDER + Path.DirectorySeparatorChar + FEED_ITEM);
         _scrollRect = GetComponent<ScrollRect>();
 
         var itemLength = _feedItemPrefab.GetComponent<RectTransform>().rect.height;

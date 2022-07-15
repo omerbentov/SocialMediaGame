@@ -1,10 +1,16 @@
+using System;
 using UnityEngine;
 
 public class UIController
 {
     private readonly GameObject _canvas;
     private readonly UserInterfaceSO _model;
-    private CollectibleView _collectibleView;
+    private CollectibleWidgetView _collectibleWidgetView;
+
+    public Transform CollectibleTransform
+    {
+        get { return _collectibleWidgetView.transform; }
+    }
 
     public UIController()
     {
@@ -25,8 +31,8 @@ public class UIController
 
     private void CreateCollectibles()
     {
-        _collectibleView = GameObject.Instantiate(_model.CollectiblePrefab, _canvas.transform).GetComponent<CollectibleView>();
-        _collectibleView.Setup(0, _model.CollectibleSprite);
+        _collectibleWidgetView = GameObject.Instantiate(_model.CollectibleWidgetPrefab, _canvas.transform).GetComponent<CollectibleWidgetView>();
+        _collectibleWidgetView.Setup(0, _model.CollectibleSprite);
     }
 
     private void AddListeners()
@@ -37,11 +43,29 @@ public class UIController
 
     private void OnItemClickedEvent(ItemClickedEvent eventData)
     {
-        Client.Client.Instance.Data.AddCollectibles(eventData.IsGood ? 1 : -1);
+        if (eventData.IsGood)
+        {
+            Collect(eventData.Position, () => { Client.Client.Instance.Data.AddCollectibles(1); });
+        }
+        else
+        {
+            Client.Client.Instance.Data.AddCollectibles(-1);
+        }
+    }
+
+    private void Collect(Vector3 position, Action OnComplete)
+    {
+        var collectible = 
+            GameObject.Instantiate(
+                Client.Client.Instance.Configuration.UserInterfaceSo.CollectiblePrefab,
+                Client.Client.Instance.UI.CollectibleTransform)
+            .GetComponent<MoveToPostion>();
+
+        collectible.Setup(position, OnComplete);
     }
 
     private void OnCollectibleCountChanged(CollectiblesCountChangedEvent eventData)
     {
-        _collectibleView.SetCollectiblesCount(eventData.Count);
+        _collectibleWidgetView.SetCollectiblesCount(eventData.Count);
     }
 }

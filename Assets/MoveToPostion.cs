@@ -14,7 +14,7 @@ public class MoveToPostion : MonoBehaviour
 
     void Start()
     {
-        _movementTime = Client.Client.Instance.Configuration.UserInterfaceSo.CollectibleTimerToMove;
+        _movementTime = Client.Client.Instance.Configuration.CollectibleTimerToMove;
         _goToPosition = Client.Client.Instance.UI.CollectibleTransform.position;
     }
     

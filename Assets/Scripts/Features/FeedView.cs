@@ -1,30 +1,31 @@
-using System.IO;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(ScrollRect))]
 public class FeedView : MonoBehaviour
 {
-    private const string FEED_ITEM = "FeedItem";
-    private const string PREFABS_FOLDER = "Prefabs";
-    
     private const int BETWEEN_ITEMS = 200;
-    private const int START_Y_OFFSET = 100;
-    private const float SCROLLING_TIME_IN_SECONDS = 100;
+    private const int START_Y_OFFSET = -100;
 
+    private bool _ended;
+    private FeedSO _feedSO;
     private float _startTime;
     private Sprite[] _badSprites;
     private Sprite[] _goodSprites;
     private ScrollRect _scrollRect;
     private GameObject _feedItemPrefab;
 
-    [SerializeField] private ConvexHullParent _contentParent;
+    [SerializeField] public ConvexHullParent _contentParent;
+
+    public event Action ScrollEndedEvent;
 
     public bool EnableAutoScrolling { get; set; }
 
     public void Setup(FeedSO feedSo)
     {
-        _feedItemPrefab = Resources.Load<GameObject>(PREFABS_FOLDER + Path.DirectorySeparatorChar + FEED_ITEM);
+        _feedSO = feedSo;
+        _feedItemPrefab =Client.Client.Instance.Configuration.FeedItemPrefab;
         _scrollRect = GetComponent<ScrollRect>();
 
         var itemLength = _feedItemPrefab.GetComponent<RectTransform>().rect.height;
@@ -67,6 +68,24 @@ public class FeedView : MonoBehaviour
         if (!EnableAutoScrolling) return;
 
         _startTime += Time.fixedDeltaTime;
-        _scrollRect.verticalNormalizedPosition = Mathf.Lerp(1, 0, _startTime / SCROLLING_TIME_IN_SECONDS);
+        var scrollPosition = _startTime / _feedSO.ScrollTimeInSecounds;
+
+        if (scrollPosition > 1)
+        {
+            if (!_ended)
+            {
+                _ended = true;
+                ScrollEndedEvent?.Invoke();
+            }
+        }
+        else
+        {
+            _scrollRect.verticalNormalizedPosition = Mathf.Lerp(1, 0, scrollPosition);
+        }
+
     }
+}
+
+internal class FeedScrollEndedEvent
+{
 }

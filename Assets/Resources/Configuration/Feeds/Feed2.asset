@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 803a6d471622d4dabaf8dea842742237, type: 3}
-  m_Name: Feed1
+  m_Name: Feed2
   m_EditorClassIdentifier: 
   ScrollTimeInSecounds: 100
   GoodItems:

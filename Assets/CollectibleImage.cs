@@ -4,6 +4,6 @@ public class CollectibleImage : Image
 {
     void Start()
     {
-        base.sprite = Client.Client.Instance.Configuration.UserInterfaceSo.CollectibleSprite;
+        base.sprite = Client.Client.Instance.Configuration.CollectibleSprite;
     }
 }

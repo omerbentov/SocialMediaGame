@@ -4,7 +4,7 @@ using UnityEngine;
 public class UIController
 {
     private readonly GameObject _canvas;
-    private readonly UserInterfaceSO _model;
+    private readonly SocialGameConfigurationSO _model;
     private CollectibleWidgetView _collectibleWidgetView;
 
     public Transform CollectibleTransform
@@ -14,7 +14,7 @@ public class UIController
 
     public UIController()
     {
-        _model = Client.Client.Instance.Configuration.UserInterfaceSo;
+        _model = Client.Client.Instance.Configuration;
         _canvas = GameObject.Instantiate(_model.Canvas);
         
         Setup();
@@ -57,7 +57,7 @@ public class UIController
     {
         var collectible = 
             GameObject.Instantiate(
-                Client.Client.Instance.Configuration.UserInterfaceSo.CollectiblePrefab,
+                Client.Client.Instance.Configuration.CollectiblePrefab,
                 Client.Client.Instance.UI.CollectibleTransform)
             .GetComponent<MoveToPostion>();
 

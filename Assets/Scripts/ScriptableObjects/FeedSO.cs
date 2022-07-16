@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Feed", menuName = "SO/Feed")]
 public class FeedSO : ScriptableObject
 {
+    public float ScrollTimeInSecounds;
     public FeedItemSO[] GoodItems;
     public FeedItemSO[] Badtems;
 

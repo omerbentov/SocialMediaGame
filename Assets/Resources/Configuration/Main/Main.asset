@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c14a8989715e481795899a0f99eae7d, type: 3}
   m_Name: Main
   m_EditorClassIdentifier: 
-  UserInterfaceSo: {fileID: 11400000, guid: d06ab694ae8824a85ab80608fc90d982, type: 2}
+  Canvas: {fileID: 3274447218561815107, guid: 74f2be937d0784426b9fc4c8ebfdb03c, type: 3}
+  CollectiblesEnabled: 1
+  CollectibleSprite: {fileID: 21300000, guid: aa99a9e2c096f4353be49f579c2f06ef, type: 3}
+  CollectiblePrefab: {fileID: 1779626906480122551, guid: bd22d0e0e41ef41b89cae40367f4bc13, type: 3}
+  CollectibleWidgetPrefab: {fileID: 1779626906480122551, guid: 4cbcdd65f1ad34d73973e6fc42e732c5, type: 3}
+  CollectibleTimerToMove: 1.5
+  EnableAutoScroll: 1
+  FeedCanvasPrefab: {fileID: 2052536858558301623, guid: 902080c2db5884d8eadee63cdad438f5, type: 3}
+  FeedItemPrefab: {fileID: 7666740644361397808, guid: 9f0aac8aed9404dacb7d3ccab50346cb, type: 3}
   Feeds:
   - {fileID: 11400000, guid: c47274eb5c7884fa49bb33765c0ad3e6, type: 2}

@@ -15,7 +15,6 @@ public class MoveToPostion : MonoBehaviour
     void Start()
     {
         _movementTime = Client.Client.Instance.Configuration.CollectibleTimerToMove;
-        _goToPosition = Client.Client.Instance.UI.CollectibleTransform.position;
     }
     
     void Update()
@@ -34,15 +33,21 @@ public class MoveToPostion : MonoBehaviour
             
             if (_timeSinceEnabled > _movementTime)
             {
-                _onArrival.Invoke();
+                if (_onArrival != null)
+                {
+                    _onArrival.Invoke();
+                }
+
                 Destroy(this.gameObject);
             }
         }
     }
 
-    public void Setup(Vector3 startPosition, Action onArrival)
+    public void Setup(Vector3 startPosition, Vector3 gotoLocation, Action onArrival)
     {
         _basePosition = startPosition;
+        _goToPosition = gotoLocation;
+        
         transform.position = _basePosition;
         _onArrival = onArrival;
         

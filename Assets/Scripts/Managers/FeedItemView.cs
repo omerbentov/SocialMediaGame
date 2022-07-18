@@ -8,7 +8,7 @@ public class FeedItemView : MonoBehaviour
     [SerializeField] private bool _isGood;
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI Title; 
-    [SerializeField] private TextMeshProUGUI Likes; 
+    [SerializeField] private TextMeshProUGUI Likes;
 
     public void Setup(FeedItemSO feedItemSoData, Vector3 accumulatedOffset)
     {
@@ -22,7 +22,7 @@ public class FeedItemView : MonoBehaviour
     public void OnClick()
     {
         Client.Client.Instance.Broadcaster.Broadcast(
-            new ItemClickedEvent()
+            new CollectibleClickedEvent()
             {
                 IsGood = _isGood,
                 Position = transform.position
@@ -30,8 +30,9 @@ public class FeedItemView : MonoBehaviour
     }
 }
 
-public class ItemClickedEvent
+public class CollectibleClickedEvent
 {
+    public eCollectibleType Type;
     public bool IsGood { get; set; }
     public Vector3 Position { get; set; }
 }

@@ -19,8 +19,7 @@ namespace Client
         public CameraManager Camera { get; private set; }
         public ISaverManager GameSaver { get; private set; }
         public SocialGameConfigurationSO Configuration { get; private set; }
-        public UIController UI { get; private set; }
-        public DataManager Data { get; private set; }
+        public UIManager UI { get; private set; }
         public LevelManager Level { get; private set; }
 
         #endregion
@@ -34,17 +33,11 @@ namespace Client
             LoadConfiguration();
             SetupSystems();
             SetupManagers(updateManager);
-            SetupControllers();
         }
 
         private void LoadConfiguration()
         {
             Configuration = Resources.Load<SocialGameConfigurationSO>("Configuration/Main/Main");
-        }
-
-        private void SetupControllers()
-        {
-            UI = new UIController();
         }
 
         #endregion
@@ -67,10 +60,10 @@ namespace Client
 
         private void SetupManagers(UpdateManager updateManager)
         {
-            Data = new DataManager();
             Popups = new PopupsManager(this);
             Update = updateManager;
             Level = new LevelManager();
+            UI = new UIManager();
         }
 
         #endregion
@@ -88,8 +81,7 @@ namespace Client
         StateMachine StateMachine { get; }
         UpdateManager Update { get; }
         SocialGameConfigurationSO Configuration { get; }
-        UIController UI { get; }
-        DataManager Data { get; }
+        UIManager UI { get; }
         LevelManager Level { get; }
 
         #endregion

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +17,16 @@ public class FeedView : MonoBehaviour
     private Sprite[] _goodSprites;
     private ScrollRect _scrollRect;
     private GameObject _feedItemPrefab;
+    private GameObject _collectibleWidgetPrefab;
 
     [SerializeField] public ConvexHullParent _contentParent;
+
+    private Dictionary<eCollectibleType, Transform> _collectiblesLocationDictionary;
+
+    public Transform GetCollectibleGotoLocation(eCollectibleType type)
+    {
+        return _collectiblesLocationDictionary.FirstOrDefault(c => c.Key == type).Value;
+    }
 
     public event Action ScrollEndedEvent;
 
@@ -25,7 +35,8 @@ public class FeedView : MonoBehaviour
     public void Setup(FeedSO feedSo)
     {
         _feedSO = feedSo;
-        _feedItemPrefab =Client.Client.Instance.Configuration.FeedItemPrefab;
+        _feedItemPrefab = Client.Client.Instance.Configuration.FeedItemPrefab;
+        _collectibleWidgetPrefab = Client.Client.Instance.Configuration.CollectibleWidgetPrefab;
         _scrollRect = GetComponent<ScrollRect>();
 
         var itemLength = _feedItemPrefab.GetComponent<RectTransform>().rect.height;

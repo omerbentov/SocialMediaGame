@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class LevelManager 
 {
+    private FeedSO _data;
     private GameObject _feed;
     private FeedView _currentLevel;
     private int _currentLevelNumber;
+    public FeedSO CurrentData
+    {
+        get { return _data; }
+    }
 
     public LevelManager()
     {
@@ -29,8 +34,9 @@ public class LevelManager
         }
         
         _currentLevel = _feed.GetComponentInChildren<FeedView>();
-        var data = Client.Client.Instance.Configuration.Feeds[levelNumber];
-        _currentLevel.Setup(data);
+         _data = Client.Client.Instance.Configuration.Feeds[levelNumber];
+        
+        _currentLevel.Setup(_data);
     }
 
     private void StartLevel()

@@ -1,3 +1,4 @@
+using System;
 using Extensions;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ using UnityEngine;
 public class FeedSO : ScriptableObject
 {
     public float ScrollTimeInSecounds;
+    public CollectibleData[] Collectibles;
     public FeedItemSO[] GoodItems;
     public FeedItemSO[] Badtems;
 
@@ -20,4 +22,12 @@ public class FeedSO : ScriptableObject
     {
         get { return GoodItems.Length + Badtems.Length; }
     }      
+}
+
+[Serializable]
+public class CollectibleData
+{
+    public eCollectibleType Type;
+    public Sprite Sprite;
+    public int Count;
 }
